@@ -13,20 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     async function getWeather(city) {
-        const apiKey = 'dd4836763f4645f4a216512911c74f12'; // 替换为您的 OpenWeatherMap API 密钥
-        const url = 'http://devapi.qweather.com/v7/weather/now';
+        const apiKey = 'dd4836763f4645f4a216512911c74f12'; // 替换为您的和风天气API密钥
+        const url = `https://devapi.qweather.com/v7/weather/now?location=${city}&key=${apiKey}`;
 
         try {
             const response = await fetch(url);
             const data = await response.json();
 
-            if (data.cod === 200) {
+            if (data.code === '200') {
                 const weather = `
-                    <h3>${data.name}天气</h3>
-                    <p>温度: ${data.main.temp}°C</p>
-                    <p>天气: ${data.weather[0].description}</p>
-                    <p>湿度: ${data.main.humidity}%</p>
-                    <p>风速: ${data.wind.speed} m/s</p>
+                    <h3>${city}天气</h3>
+                    <p>温度: ${data.now.temp}°C</p>
+                    <p>天气: ${data.now.text}</p>
+                    <p>湿度: ${data.now.humidity}%</p>
+                    <p>风速: ${data.now.windSpeed} km/h</p>
                 `;
                 weatherResult.innerHTML = weather;
             } else {
