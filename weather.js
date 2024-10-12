@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     weatherBtn.addEventListener('click', function() {
         const city = cityInput.value.trim();
         if (city) {
+            weatherResult.textContent = '正在获取天气信息...'; // 添加加载提示
             getWeather(city);
         } else {
             weatherResult.textContent = '请输入有效的城市名称';
