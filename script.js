@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 添加天气查询功能
     const api_key = "153cf4c100a7493baf02c3867c02b656";
-    const city_id = "101010100"; // 北京的Location ID
+    const city_id = "101020100"; // 上海的Location ID
 
     document.getElementById("weather-btn").addEventListener("click", function() {
         fetchWeatherData();
