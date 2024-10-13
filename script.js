@@ -99,4 +99,38 @@ document.addEventListener('DOMContentLoaded', function() {
         chatHistory.appendChild(messageElement);
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
+
+    // 添加天气查询功能
+    const api_key = "153cf4c100a7493baf02c3867c02b656";
+    const city_id = "101010100"; // 北京的Location ID
+
+    document.getElementById("weather-btn").addEventListener("click", function() {
+        fetchWeatherData();
+    });
+
+    function fetchWeatherData() {
+        const url = `https://devapi.qweather.com/v7/weather/now?location=${city_id}&key=${api_key}`;
+        
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === "200") {
+                    displayWeatherData(data.now);
+                } else {
+                    console.error("获取天气数据失败:", data);
+                }
+            })
+            .catch(error => console.error("请求错误:", error));
+    }
+
+    function displayWeatherData(weather) {
+        const resultDiv = document.getElementById("weather-result");
+        resultDiv.innerHTML = `
+            <p>温度: ${weather.temp}°C</p>
+            <p>体感温度: ${weather.feelsLike}°C</p>
+            <p>天气状况: ${weather.text}</p>
+            <p>风速: ${weather.windSpeed} km/h</p>
+            <p>湿度: ${weather.humidity}%</p>
+        `;
+    }
 });
